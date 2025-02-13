@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5831830053980120176}
   - component: {fileID: 8381763439586070014}
   - component: {fileID: 3584512436946026610}
-  - component: {fileID: 368878072286848071}
+  - component: {fileID: 2713564314829462961}
   m_Layer: 0
-  m_Name: PlanetSphere
+  m_Name: PlanetBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,8 +65,7 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 47cf09eda29b0814dbeb741c193a4279, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,7 +108,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &368878072286848071
+--- !u!114 &2713564314829462961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,8 +117,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8216702108569330157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9749ac02b7b34e24094b48097c945b8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 11565463af8d9894584871e40032fba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerNumber: 1
-  color: {r: 0.18106796, g: 0.6528301, b: 0.18436703, a: 0}
+  materials:
+  - {fileID: 2100000, guid: cf6897efae9eb284bbe94f2d9b0e176c, type: 2}
+  - {fileID: 2100000, guid: 47cf09eda29b0814dbeb741c193a4279, type: 2}
+  - {fileID: 2100000, guid: b0e0420361d4b6946ba5658d60b3c097, type: 2}
+  - {fileID: 2100000, guid: 487a11804026b27459f80d76e7bdff2b, type: 2}
+  - {fileID: 2100000, guid: 83499d78b18abf24381d58493d2d0d03, type: 2}
