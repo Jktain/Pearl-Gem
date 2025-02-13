@@ -465,6 +465,13 @@ MonoBehaviour:
   - 0.72
   - 0.63
   - 0.56
+  segmentsCount: 7
+  materials:
+  - {fileID: 2100000, guid: cf6897efae9eb284bbe94f2d9b0e176c, type: 2}
+  - {fileID: 2100000, guid: 47cf09eda29b0814dbeb741c193a4279, type: 2}
+  - {fileID: 2100000, guid: b0e0420361d4b6946ba5658d60b3c097, type: 2}
+  - {fileID: 2100000, guid: 487a11804026b27459f80d76e7bdff2b, type: 2}
+  - {fileID: 2100000, guid: 83499d78b18abf24381d58493d2d0d03, type: 2}
 --- !u!4 &1064406798
 Transform:
   m_ObjectHideFlags: 0
