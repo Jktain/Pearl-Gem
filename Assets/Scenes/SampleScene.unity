@@ -206,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -377,6 +377,37 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &471860382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 471860383}
+  m_Layer: 0
+  m_Name: HandBallSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &471860383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471860382}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.0407014, y: 2.7385864, z: -13.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,17 +486,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613e1d4ea6055fc458e67cd52d1b9ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 8216702108569330157, guid: 35385d8c4d37521449c3575285862971, type: 3}
+  layers: 3
   ballsInLayer: 500
+  segmentsCount: 7
   planetRadius: 6.2
-  layers: 1
   layerBallSizes:
   - 1
   - 0.85
   - 0.72
   - 0.63
   - 0.56
-  segmentsCount: 7
+  ballPrefab: {fileID: 8216702108569330157, guid: 35385d8c4d37521449c3575285862971, type: 3}
   materials:
   - {fileID: 2100000, guid: cf6897efae9eb284bbe94f2d9b0e176c, type: 2}
   - {fileID: 2100000, guid: 47cf09eda29b0814dbeb741c193a4279, type: 2}
@@ -495,3 +526,4 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1064406798}
+  - {fileID: 471860383}

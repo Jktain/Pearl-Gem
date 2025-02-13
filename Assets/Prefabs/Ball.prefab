@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8381763439586070014}
   - component: {fileID: 3584512436946026610}
   m_Layer: 0
-  m_Name: PlanetBall
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
