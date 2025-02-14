@@ -1,14 +1,18 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class HandBall : MonoBehaviour
 {
     [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private TMP_Text ballsCountTMP;
     [SerializeField] private float launchForce = 10f;
     [SerializeField] private AimLine aimLine;
     [SerializeField] private float delayBeforeNewBall = 2f; // Час очікування перед новою кулькою
-    [SerializeField] private int throwCount = 5; // Час очікування перед новою кулькою
+    [SerializeField] private int ballsMaxCount = 5; // Час очікування перед новою кулькою
+    [SerializeField] private GameManager gameManager; // Час очікування перед новою кулькою
 
+    private int ballsCurrentCount;
     private GameObject currentBall;
     private Camera cam;
     private Vector3 launchDirection;
@@ -16,9 +20,10 @@ public class HandBall : MonoBehaviour
     private bool canThrow = true; // Чи можна кидати кульку зараз
 
     public Material[] materials;
-    private void Start()
+    public void StartThrowing()
     {
         cam = Camera.main;
+        ballsCurrentCount = ballsMaxCount;
         CreateBall();
     }
 
@@ -40,27 +45,42 @@ public class HandBall : MonoBehaviour
             isAiming = false;
             aimLine.HideTrajectory();
             LaunchBall();
+            ballsCountTMP.gameObject.SetActive(false);
+            ballsCurrentCount--;
         }
     }
 
     public void CreateBall()
     {
-        if (currentBall != null) Destroy(currentBall); // Видаляємо попередню кульку
-
-        currentBall = Instantiate(ballPrefab, transform.position, Quaternion.identity);
-
-        MeshRenderer meshRenderer = currentBall.GetComponent<MeshRenderer>();
-        meshRenderer.material = materials[Random.Range(0, materials.Length)];
-
-        Rigidbody rb = currentBall.GetComponent<Rigidbody>();
-        rb.isKinematic = true; // Робимо кульку статичною, поки її не запустять
-
-        canThrow = true;
-
-        BallCollision ballScript = currentBall.GetComponent<BallCollision>();
-        if (ballScript != null)
+        if(ballsCurrentCount <= 0)
         {
-            ballScript.SetHandBall(this); // Передаємо посилання на HandBall у Ball
+            gameManager.GameOver(true);
+            return;
+        }
+        else
+        {
+            Debug.Log(ballsCurrentCount);
+
+            if (currentBall != null) Destroy(currentBall); // Видаляємо попередню кульку
+
+            currentBall = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+
+            MeshRenderer meshRenderer = currentBall.GetComponent<MeshRenderer>();
+            meshRenderer.material = materials[Random.Range(0, materials.Length)];
+
+            Rigidbody rb = currentBall.GetComponent<Rigidbody>();
+            rb.isKinematic = true; // Робимо кульку статичною, поки її не запустять
+
+            ballsCountTMP.text = ballsCurrentCount.ToString();
+            ballsCountTMP.gameObject.SetActive(true);
+
+            canThrow = true;
+
+            BallCollision ballScript = currentBall.GetComponent<BallCollision>();
+            if (ballScript != null)
+            {
+                ballScript.SetHandBall(this); // Передаємо посилання на HandBall у Ball
+            }
         }
     }
 
@@ -83,7 +103,6 @@ public class HandBall : MonoBehaviour
         if (ball != null)
         {
             Destroy(ball);
-
             CreateBall();
         }
     }

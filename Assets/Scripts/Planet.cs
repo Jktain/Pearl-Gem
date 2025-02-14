@@ -14,12 +14,7 @@ public class Planet : MonoBehaviour
     [SerializeField] private GameObject ballPrefab;
     [SerializeField] private Material[] materials;
 
-    private void Start()
-    {
-        GeneratePlanet();
-    }
-
-    private void GeneratePlanet()
+    public void GeneratePlanet()
     {
         for (int layer = 0; layer < layers; layer++)
         {

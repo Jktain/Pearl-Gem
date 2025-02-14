@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.TextCore;
 
 public class BallCollision : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
+
     private Material handBallMaterial;
     private HandBall handBall;
 
@@ -17,17 +20,20 @@ public class BallCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Material planetBallMaterial = other.gameObject.GetComponent<MeshRenderer>().sharedMaterial;
+        Transform rootObject = other.transform.root;
+        Material planetBallMaterial = other.GetComponent<MeshRenderer>().sharedMaterial;
 
         if (planetBallMaterial == handBallMaterial)
         {
             Destroy(other.transform.parent.gameObject);
+
+            if(rootObject.childCount == 0)
+            {
+                gameManager.GameOver(false);
+            }
         }
 
-        if (handBall != null)
-        {
-            handBall.CreateBall(); // Викликаємо створення нової кульки
-        }
+        handBall.CreateBall();
 
         Destroy(gameObject); // Видаляємо кульку
     }
