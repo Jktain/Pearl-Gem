@@ -1,0 +1,1 @@
+C:\Users\Yevhen\Desktop\Unity\Pearl Gem\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\35j13a4b\obj\arm64-v8a

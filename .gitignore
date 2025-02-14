@@ -35,7 +35,6 @@ Packages/packages-lock.json
 # Generated files
 *.dll
 *.exe
-*.apk
 *.unitypackage
 *.ipa
 
