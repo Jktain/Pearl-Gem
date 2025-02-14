@@ -4,15 +4,14 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Planet : MonoBehaviour
 {
+    [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private Material[] materials;
+
     [SerializeField] private int layers = 5;
     [SerializeField] private int ballsInLayer = 500;
     [SerializeField] private int segmentsCount = 1;
-
     [SerializeField] private float planetRadius = 6.2f;
     [SerializeField] private float[] layerBallSizes;
-
-    [SerializeField] private GameObject ballPrefab;
-    [SerializeField] private Material[] materials;
 
     public void GeneratePlanet()
     {

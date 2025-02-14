@@ -5,19 +5,20 @@ using TMPro;
 public class HandBall : MonoBehaviour
 {
     [SerializeField] private GameObject ballPrefab;
-    [SerializeField] private TMP_Text ballsCountTMP;
-    [SerializeField] private float launchForce = 10f;
     [SerializeField] private AimLine aimLine;
-    [SerializeField] private float delayBeforeNewBall = 2f; // Час очікування перед новою кулькою
-    [SerializeField] private int ballsMaxCount = 5; // Час очікування перед новою кулькою
-    [SerializeField] private GameManager gameManager; // Час очікування перед новою кулькою
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private TMP_Text ballsCountTMP;
 
-    private int ballsCurrentCount;
+    [SerializeField] private float launchForce = 10f;
+    [SerializeField] private float delayBeforeNewBall = 2f;
+    [SerializeField] private int ballsMaxCount = 5;
+
     private GameObject currentBall;
     private Camera cam;
     private Vector3 launchDirection;
+    private int ballsCurrentCount;
     private bool isAiming;
-    private bool canThrow = true; // Чи можна кидати кульку зараз
+    private bool canThrow = true;
 
     public Material[] materials;
     public void StartThrowing()
@@ -31,7 +32,7 @@ public class HandBall : MonoBehaviour
     {
         if (!canThrow || currentBall == null) return;
 
-        if (Input.GetMouseButton(0)) // Натискання миші або тачскрін
+        if (Input.GetMouseButton(0))
         {
             isAiming = true;
             Vector3 mousePos = Input.mousePosition;
@@ -40,7 +41,7 @@ public class HandBall : MonoBehaviour
             launchDirection = (worldPos - transform.position).normalized;
             aimLine.ShowTrajectory(transform.position, launchDirection * launchForce);
         }
-        else if (Input.GetMouseButtonUp(0) && isAiming) // Відпускання миші
+        else if (Input.GetMouseButtonUp(0) && isAiming) 
         {
             isAiming = false;
             aimLine.HideTrajectory();
@@ -59,17 +60,15 @@ public class HandBall : MonoBehaviour
         }
         else
         {
-            Debug.Log(ballsCurrentCount);
+            if (currentBall != null) Destroy(currentBall);
 
-            if (currentBall != null) Destroy(currentBall); // Видаляємо попередню кульку
-
-            currentBall = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+            currentBall = Instantiate(ballPrefab, transform.position, Quaternion.identity, transform.parent);
 
             MeshRenderer meshRenderer = currentBall.GetComponent<MeshRenderer>();
             meshRenderer.material = materials[Random.Range(0, materials.Length)];
 
             Rigidbody rb = currentBall.GetComponent<Rigidbody>();
-            rb.isKinematic = true; // Робимо кульку статичною, поки її не запустять
+            rb.isKinematic = true;
 
             ballsCountTMP.text = ballsCurrentCount.ToString();
             ballsCountTMP.gameObject.SetActive(true);
@@ -79,7 +78,7 @@ public class HandBall : MonoBehaviour
             BallCollision ballScript = currentBall.GetComponent<BallCollision>();
             if (ballScript != null)
             {
-                ballScript.SetHandBall(this); // Передаємо посилання на HandBall у Ball
+                ballScript.SetHandBall(this);
             }
         }
     }
@@ -89,16 +88,16 @@ public class HandBall : MonoBehaviour
         if (currentBall == null) return;
 
         Rigidbody rb = currentBall.GetComponent<Rigidbody>();
-        rb.isKinematic = false; // Тепер кулька може рухатися
+        rb.isKinematic = false;
         rb.linearVelocity = launchDirection * launchForce;
 
-        canThrow = false; // Забороняємо новий кидок до завершення
+        canThrow = false;
         StartCoroutine(DeleteBallCoroutine(currentBall));
     }
 
     private IEnumerator DeleteBallCoroutine(GameObject ball)
     {
-        yield return new WaitForSeconds(delayBeforeNewBall); // Чекаємо `n` секунд
+        yield return new WaitForSeconds(delayBeforeNewBall);
 
         if (ball != null)
         {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,4 +44,31 @@ public class GameManager : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
+
+    public void StartCheckLayerCoroutine(Transform layer, Transform planet)
+    {
+        StartCoroutine(CheckAndDestroyLayer(layer, planet));
+    }
+
+    private IEnumerator CheckAndDestroyLayer(Transform layer, Transform planet)
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (layer != null && layer.childCount == 0)
+        {
+            Destroy(layer.gameObject);
+            StartCoroutine(CheckAndDestroyPlanet(planet));
+        }
+    }
+
+    private IEnumerator CheckAndDestroyPlanet(Transform planet)
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (planet != null && planet.childCount == 0)
+        {
+            GameOver(false);
+        }
+    }
+
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 public class AimLine : MonoBehaviour
 {
+    [SerializeField] private LayerMask collisionMask;
     [SerializeField] private LineRenderer lineRenderer;
+
     [SerializeField] private int linePoints = 30;
     [SerializeField] private float timeStep = 0.05f;
-    [SerializeField] private LayerMask collisionMask;
 
     public void ShowTrajectory(Vector3 startPosition, Vector3 velocity)
     {

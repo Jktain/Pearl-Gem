@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.TextCore;
 
@@ -10,6 +11,7 @@ public class BallCollision : MonoBehaviour
 
     private void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
         handBallMaterial = GetComponent<MeshRenderer>().sharedMaterial;
     }
 
@@ -20,21 +22,20 @@ public class BallCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Transform rootObject = other.transform.root;
+        Transform layer = other.transform.parent.transform.parent;
+        Transform planet = layer.transform.parent;
+
         Material planetBallMaterial = other.GetComponent<MeshRenderer>().sharedMaterial;
 
         if (planetBallMaterial == handBallMaterial)
         {
             Destroy(other.transform.parent.gameObject);
 
-            if(rootObject.childCount == 0)
-            {
-                gameManager.GameOver(false);
-            }
+            gameManager.StartCheckLayerCoroutine(layer, planet);
         }
 
-        handBall.CreateBall();
+        Destroy(gameObject);
 
-        Destroy(gameObject); // Видаляємо кульку
+        handBall.CreateBall();
     }
 }
